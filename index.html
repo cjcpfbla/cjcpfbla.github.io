@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CJCP FBLA</title>
+<link rel="icon" href="images/logo-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0b1f4b;
+    --navy-2: #12306e;
+    --blue: #1d4fb8;
+    --gold: #f5b21b;
+    --gold-soft: #fff4d6;
+    --ink: #13213d;
+    --muted: #5b6782;
+    --bg: #ffffff;
+    --bg-alt: #f3f6fc;
+    --line: #dde4f1;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: Inter, system-ui, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; }
+  h1, h2, h3, h4 { font-family: Montserrat, sans-serif; line-height: 1.15; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 88px 0; scroll-margin-top: 70px; }
+  .eyebrow { font-family: Montserrat, sans-serif; font-weight: 700; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+  .section-title { font-size: clamp(28px, 4vw, 40px); font-weight: 800; color: var(--navy); margin-bottom: 14px; }
+  .section-sub { color: var(--muted); max-width: 640px; font-size: 17px; }
+
+  /* Nav */
+  .nav { position: sticky; top: 0; z-index: 50; background: var(--navy); border-bottom: 3px solid var(--gold); }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; }
+  .brand-mark { width: 46px; height: 46px; background: #fff; border-radius: 10px; display: grid; place-items: center; padding: 6px; }
+  .brand-mark img { width: 100%; height: auto; }
+  .foot-logo { width: 120px; border-radius: 14px; background: #fff; margin-bottom: 16px; }
+  .brand-text { font-family: Montserrat, sans-serif; font-weight: 800; font-size: 18px; letter-spacing: .02em; line-height: 1.05; }
+  .brand-text small { display: block; font-size: 11px; font-weight: 600; color: var(--gold); letter-spacing: .12em; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 6px; list-style: none; align-items: center; }
+  .nav-links a { color: #dbe4f7; text-decoration: none; font-weight: 600; font-size: 15px; padding: 8px 14px; border-radius: 8px; transition: background .15s, color .15s; }
+  .nav-links a:hover { background: rgba(255,255,255,.08); color: #fff; }
+  .nav-links a.cta { background: var(--gold); color: var(--navy); }
+  .nav-links a.cta:hover { background: #ffc43d; }
+  .menu-btn { display: none; background: none; border: 0; color: #fff; cursor: pointer; padding: 8px; }
+
+  /* Hero */
+  .hero { position: relative; color: #fff; padding: 0; min-height: 620px; display: flex; align-items: center; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: url("images/photo3.jpg") center 35% / cover no-repeat; }
+  .hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(8,22,56,.95) 0%, rgba(11,31,75,.85) 45%, rgba(11,31,75,.35) 100%); }
+  .hero .wrap { position: relative; padding-top: 80px; padding-bottom: 80px; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(245,178,27,.15); border: 1px solid rgba(245,178,27,.5); color: var(--gold); font-weight: 600; font-size: 14px; padding: 6px 14px; border-radius: 999px; margin-bottom: 22px; }
+  .hero h1 { font-size: clamp(38px, 6vw, 68px); font-weight: 900; max-width: 720px; letter-spacing: -.01em; }
+  .hero h1 span { color: var(--gold); }
+  .hero p { font-size: 19px; color: #d3dcf0; max-width: 560px; margin: 20px 0 32px; }
+  .btns { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn { display: inline-block; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15px; padding: 14px 26px; border-radius: 10px; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: transform .15s, background .15s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-gold { background: var(--gold); color: var(--navy); }
+  .btn-ghost { border-color: rgba(255,255,255,.55); color: #fff; }
+  .btn-ghost:hover { background: rgba(255,255,255,.1); }
+  .btn-navy { background: var(--navy); color: #fff; }
+  .hero-stats { display: flex; gap: 40px; margin-top: 52px; flex-wrap: wrap; }
+  .hero-stats div { border-left: 3px solid var(--gold); padding-left: 14px; }
+  .hero-stats strong { display: block; font-family: Montserrat, sans-serif; font-size: 30px; font-weight: 800; }
+  .hero-stats span { color: #b9c6e3; font-size: 14px; }
+
+  /* About */
+  .about-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+  .about-img { border-radius: var(--radius); overflow: hidden; box-shadow: 0 20px 50px -20px rgba(11,31,75,.45); position: relative; }
+  .about-img img { aspect-ratio: 4/3; object-fit: cover; width: 100%; }
+  .about-img figcaption { position: absolute; left: 16px; bottom: 16px; background: var(--gold); color: var(--navy); font-weight: 700; font-size: 13px; padding: 6px 12px; border-radius: 8px; }
+  .pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 28px; }
+  .pillar { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+  .pillar h4 { font-size: 15px; color: var(--navy); margin-bottom: 4px; }
+  .pillar p { font-size: 14px; color: var(--muted); }
+  .meet { margin-top: 22px; display: flex; gap: 12px; align-items: center; background: var(--gold-soft); border-left: 4px solid var(--gold); padding: 14px 16px; border-radius: 10px; font-size: 15px; }
+
+  /* Events */
+  #events { background: var(--bg-alt); }
+  .events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 44px; }
+  .event { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: transform .2s, box-shadow .2s; }
+  .event:hover { transform: translateY(-4px); box-shadow: 0 18px 40px -18px rgba(11,31,75,.35); }
+  .event-top { padding: 22px 22px 18px; color: #fff; position: relative; }
+  .event-top.winter { background: linear-gradient(135deg, #1d4fb8, #5b8de8); }
+  .event-top.volley { background: linear-gradient(135deg, #0b1f4b, #1d4fb8); }
+  .event-top.summer { background: linear-gradient(135deg, #e89b0c, #f5c344); color: var(--navy); }
+  .event-date { display: inline-block; background: rgba(255,255,255,.2); font-weight: 700; font-size: 13px; padding: 4px 10px; border-radius: 6px; margin-bottom: 12px; }
+  .summer .event-date { background: rgba(11,31,75,.12); }
+  .event-top h3 { font-size: 23px; font-weight: 800; }
+  .event-top .icon { position: absolute; right: 18px; top: 18px; font-size: 34px; }
+  .event-body { padding: 20px 22px 24px; display: flex; flex-direction: column; flex: 1; }
+  .event-body > p { color: var(--muted); font-size: 15px; margin-bottom: 16px; }
+  .facts { list-style: none; display: grid; gap: 8px; margin-bottom: 16px; font-size: 14.5px; }
+  .facts li { display: flex; gap: 10px; }
+  .facts b { color: var(--navy); min-width: 66px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+  .tags span { font-size: 12.5px; font-weight: 600; background: var(--bg-alt); color: var(--navy-2); border: 1px solid var(--line); padding: 4px 10px; border-radius: 999px; }
+  .event .btn { margin-top: auto; text-align: center; }
+
+  /* Registration */
+  .reg { background: var(--navy); color: #fff; }
+  .reg-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: start; }
+  .reg .section-title { color: #fff; }
+  .reg .section-sub { color: #b9c6e3; }
+  .reg .eyebrow { color: var(--gold); }
+  .price-table { margin-top: 28px; display: grid; gap: 12px; }
+  .price-row { display: flex; justify-content: space-between; gap: 16px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 10px; padding: 14px 16px; }
+  .price-row span { color: #c8d3ec; font-size: 15px; }
+  .price-row strong { color: var(--gold); font-family: Montserrat, sans-serif; white-space: nowrap; }
+  .about-grid > *, .reg-grid > *, .events-grid > *, .row2 > * { min-width: 0; }
+  .reg-card { background: #fff; color: var(--ink); border-radius: var(--radius); padding: 30px; box-shadow: 0 30px 60px -25px rgba(0,0,0,.5); }
+  .reg-card h3 { color: var(--navy); font-size: 22px; margin-bottom: 18px; }
+  .field { margin-bottom: 14px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  label { display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px; color: var(--navy); }
+  input, select { width: 100%; font: inherit; font-size: 15px; padding: 11px 13px; border: 1.5px solid var(--line); border-radius: 9px; background: #fff; color: var(--ink); }
+  input:focus, select:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(29,79,184,.15); }
+  .reg-card .btn { width: 100%; margin-top: 6px; }
+  .reg-card .btn:disabled { opacity: .7; cursor: wait; transform: none; }
+  .hidden { display: none !important; }
+  .note { font-size: 13px; color: var(--muted); margin-top: 12px; text-align: center; }
+  .error { color: #c0352b; font-size: 14px; font-weight: 600; margin-top: 10px; text-align: center; }
+  .success { text-align: center; padding: 50px 10px; }
+  .success .check { width: 64px; height: 64px; border-radius: 50%; background: var(--gold); color: var(--navy); display: grid; place-items: center; margin: 0 auto 18px; font-size: 30px; font-weight: 800; }
+  .success h3 { margin-bottom: 8px; }
+  .success p { color: var(--muted); }
+  .link-btn { background: none; border: 0; color: var(--blue); font: inherit; font-size: 14px; font-weight: 600; text-decoration: underline; cursor: pointer; margin-top: 18px; }
+
+  /* Gallery */
+  .gallery { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 16px; margin-top: 40px; height: 520px; }
+  .gallery figure { position: relative; border-radius: var(--radius); overflow: hidden; }
+  .gallery figure:first-child { grid-row: span 2; }
+  .gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+  .gallery figure:hover img { transform: scale(1.04); }
+  .gallery figcaption { position: absolute; inset: auto 0 0 0; padding: 40px 18px 14px; background: linear-gradient(transparent, rgba(8,22,56,.85)); color: #fff; font-weight: 600; font-size: 15px; }
+
+  /* Officers */
+  #officers { background: var(--bg-alt); }
+  .officers { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-top: 40px; }
+  .officer { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: flex; align-items: center; gap: 14px; }
+  .avatar { flex: none; width: 46px; height: 46px; border-radius: 50%; background: var(--navy); color: var(--gold); display: grid; place-items: center; font-family: Montserrat, sans-serif; font-weight: 800; font-size: 15px; }
+  .officer.lead .avatar { background: var(--gold); color: var(--navy); }
+  .officer h4 { font-size: 15.5px; color: var(--navy); }
+  .officer p { font-size: 13px; color: var(--muted); }
+
+  /* Footer */
+  footer { background: #071535; color: #b9c6e3; padding: 56px 0 28px; }
+  .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; }
+  footer h4 { color: #fff; font-size: 15px; margin-bottom: 14px; }
+  footer ul { list-style: none; display: grid; gap: 8px; font-size: 15px; }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--gold); }
+  .ig { display: inline-flex; align-items: center; gap: 10px; margin-top: 16px; background: rgba(255,255,255,.07); padding: 10px 16px; border-radius: 10px; color: #fff; font-weight: 600; }
+  .copy { border-top: 1px solid rgba(255,255,255,.1); margin-top: 40px; padding-top: 22px; font-size: 13px; text-align: center; }
+
+  @media (max-width: 920px) {
+    .about-grid, .reg-grid { grid-template-columns: 1fr; gap: 40px; }
+    .events-grid { grid-template-columns: 1fr; max-width: 560px; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+    .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: 280px 200px; height: auto; }
+    .gallery figure:first-child { grid-row: auto; grid-column: span 2; }
+  }
+  @media (max-width: 760px) {
+    .menu-btn { display: block; }
+    .nav-links { display: none; position: absolute; top: 71px; left: 0; right: 0; flex-direction: column; align-items: stretch; background: var(--navy); padding: 12px 16px 18px; border-bottom: 3px solid var(--gold); }
+    .nav-links.open { display: flex; }
+    .nav-links a { display: block; }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding: 0 16px; }
+    section { padding: 64px 0; }
+    .pillars, .row2 { grid-template-columns: 1fr; }
+    .foot-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; }
+    .gallery { grid-template-columns: 1fr; grid-template-rows: none; }
+    .gallery figure { height: 240px; }
+    .gallery figure:first-child { grid-column: auto; }
+    .reg-card { padding: 22px; }
+    .price-row { flex-wrap: wrap; gap: 4px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="#home" class="brand">
+      <span class="brand-mark"><img src="images/logo-mark.png" alt="CJCP FBLA logo"></span>
+      <span class="brand-text">CJCP FBLA<small>Central Jersey College Prep</small></span>
+    </a>
+    <button class="menu-btn" aria-label="Open menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#officers">Officers</a></li>
+      <li><a href="#register" class="cta">Register</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="wrap">
+    <div class="hero-badge">★ New Jersey FBLA · Somerset, NJ</div>
+    <h1>Central Jersey College Prep <span>FBLA</span></h1>
+    <p>Future Business Leaders of America. We help students build leadership, compete at regionals, states and nationals, and give back to our community.</p>
+    <div class="btns">
+      <a href="#events" class="btn btn-gold">See Upcoming Events</a>
+      <a href="#register" class="btn btn-ghost">Join the Chapter</a>
+    </div>
+    <div class="hero-stats">
+      <div><strong>60+</strong><span>Active members</span></div>
+      <div><strong>NLC</strong><span>National qualifiers</span></div>
+      <div><strong>3</strong><span>Events this year</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <figure class="about-img">
+      <img src="images/photo4.jpg" alt="CJCP FBLA members holding medals and trophies in front of the New Jersey FBLA banner">
+      <figcaption>🏆 NJ FBLA State Leadership Conference</figcaption>
+    </figure>
+    <div>
+      <div class="eyebrow">About our chapter</div>
+      <h2 class="section-title">Where future business leaders get their start</h2>
+      <p class="section-sub">CJCP FBLA is a student-run chapter that prepares members for careers in business through competition, service, and hands-on event planning. Our members have placed at the NJ State Leadership Conference and gone on to compete at the National Leadership Conference.</p>
+      <div class="pillars">
+        <div class="pillar"><h4>Compete</h4><p>Regional, state, and national competitive events</p></div>
+        <div class="pillar"><h4>Lead</h4><p>Plan and run real chapter events and fundraisers</p></div>
+        <div class="pillar"><h4>Serve</h4><p>Community service projects all year</p></div>
+        <div class="pillar"><h4>Connect</h4><p>Meet students and professionals across NJ</p></div>
+      </div>
+      <div class="meet">📅 <span><b>Chapter meetings:</b> Every Thursday, 3:00–4:00 PM in Room 204</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="events">
+  <div class="wrap">
+    <div class="eyebrow">Upcoming events</div>
+    <h2 class="section-title">Mark your calendar</h2>
+    <p class="section-sub">Every event is planned and run by our members. Tickets and entry fees support our trip to the National Leadership Conference.</p>
+
+    <div class="events-grid">
+      <article class="event">
+        <div class="event-top winter">
+          <span class="icon">❄️</span>
+          <span class="event-date">SAT · DEC 12, 2026</span>
+          <h3>Winter Wonderland</h3>
+        </div>
+        <div class="event-body">
+          <p>A family winter carnival with games, crafts, snacks, and a raffle. Bring the kids!</p>
+          <ul class="facts">
+            <li><b>Time</b> 12:00 – 3:00 PM</li>
+            <li><b>Where</b> CJCP Cafeteria</li>
+            <li><b>Tickets</b> 10 for $5 · 25 for $10</li>
+          </ul>
+          <div class="tags">
+            <span>Pie Face Showdown</span><span>Penguin Bowling</span><span>Reindeer Ring Toss</span><span>Face Painting</span><span>Bracelet Making</span><span>Ornament Spoon Balance</span>
+          </div>
+          <a href="#register" class="btn btn-navy" data-event="winter">Get Tickets</a>
+        </div>
+      </article>
+
+      <article class="event">
+        <div class="event-top volley">
+          <span class="icon">🏐</span>
+          <span class="event-date">FRI · FEB 19, 2027</span>
+          <h3>FBLA Volleyball Night</h3>
+        </div>
+        <div class="event-body">
+          <p>An 8-team, single-elimination tournament. The winners take home <b>$50 cash</b> and get to ice an FBLA board member.</p>
+          <ul class="facts">
+            <li><b>Time</b> 4:00 – 7:30 PM (check-in 3:45)</li>
+            <li><b>Where</b> CJCP Gym</li>
+            <li><b>Entry</b> $5 per player · $3 to watch</li>
+          </ul>
+          <div class="tags">
+            <span>Teams of 6</span><span>Max 8 teams</span><span>Games to 11, win by 2</span><span>Ice-the-board raffle</span>
+          </div>
+          <a href="#register" class="btn btn-navy" data-event="volleyball">Register a Team</a>
+        </div>
+      </article>
+
+      <article class="event">
+        <div class="event-top summer">
+          <span class="icon">💦</span>
+          <span class="event-date">SAT · JUNE 5, 2027</span>
+          <h3>Summertime Splashdown</h3>
+        </div>
+        <div class="event-body">
+          <p>Kick off summer and help send our competitors to <b>Nationals (NLC)</b>! Expect water balloons, relays, music, and a giant slip and slide.</p>
+          <ul class="facts">
+            <li><b>Time</b> 12:00 – 3:00 PM</li>
+            <li><b>Where</b> CJCP Field</li>
+            <li><b>Note</b> Kids under 10 must come with a guardian</li>
+          </ul>
+          <div class="tags">
+            <span>Water Balloons</span><span>Relay Races</span><span>Slip &amp; Slide</span><span>Music</span><span>Snacks for sale</span>
+          </div>
+          <a href="#register" class="btn btn-navy" data-event="splashdown">Sign Up</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="reg" id="register">
+  <div class="wrap reg-grid">
+    <div>
+      <div class="eyebrow">Registration</div>
+      <h2 class="section-title">Save your spot</h2>
+      <p class="section-sub">Register online now, or pay at the check-in desk by the entrance on event day. Volleyball teams must register before the event or at check-in.</p>
+      <div class="price-table">
+        <div class="price-row"><span>Winter Wonderland: 10 tickets</span><strong>$5</strong></div>
+        <div class="price-row"><span>Winter Wonderland: 25 tickets</span><strong>$10</strong></div>
+        <div class="price-row"><span>Volleyball Night: player entry</span><strong>$5 / player</strong></div>
+        <div class="price-row"><span>Volleyball Night: spectator</span><strong>$3</strong></div>
+        <div class="price-row"><span>Summertime Splashdown</span><strong>Free entry · snacks sold</strong></div>
+      </div>
+    </div>
+
+    <div class="reg-card">
+      <form id="regForm" novalidate>
+        <h3>Event Registration</h3>
+        <div class="field">
+          <label for="event">Event</label>
+          <select id="event" name="event" required>
+            <option value="winter">Winter Wonderland: Dec 12</option>
+            <option value="volleyball">FBLA Volleyball Night: Feb 19</option>
+            <option value="splashdown">Summertime Splashdown: June 5</option>
+            <option value="join">Join CJCP FBLA (membership)</option>
+          </select>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="first">First name</label><input id="first" name="first" autocomplete="given-name" required></div>
+          <div class="field"><label for="last">Last name</label><input id="last" name="last" autocomplete="family-name" required></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+          <div class="field"><label for="grade">Grade</label>
+            <select id="grade" name="grade"><option>9th</option><option>10th</option><option>11th</option><option>12th</option><option>Parent / Guest</option></select>
+          </div>
+        </div>
+        <div class="field hidden" id="teamField"><label for="team">Team name (volleyball)</label><input id="team" name="team" placeholder="e.g. Net Profit"></div>
+        <button type="submit" class="btn btn-gold" id="submitBtn">Register</button>
+        <p class="error hidden" id="formError"></p>
+        <p class="note">Questions? DM us on Instagram at @cjcp_fbla</p>
+      </form>
+      <div class="success hidden" id="formSuccess">
+        <div class="check">✓</div>
+        <h3>You're registered! 🎉</h3>
+        <p>We'll see you there. Follow <b>@cjcp_fbla</b> for updates.</p>
+        <button class="link-btn" id="registerAgain" type="button">Register someone else</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <div class="eyebrow">Gallery</div>
+    <h2 class="section-title">Our chapter in action</h2>
+    <div class="gallery">
+      <figure><img src="images/photo2.jpg" alt="CJCP FBLA delegation at the National Leadership Conference"><figcaption>National Leadership Conference</figcaption></figure>
+      <figure><img src="images/photo1.jpg" alt="Four CJCP FBLA members holding FBLA trophies"><figcaption>NLC finalists with their trophies</figcaption></figure>
+      <figure><img src="images/photo3.jpg" alt="The full CJCP FBLA chapter at the New Jersey State Leadership Conference"><figcaption>The whole chapter at NJ States</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="officers">
+  <div class="wrap">
+    <div class="eyebrow">Leadership</div>
+    <h2 class="section-title">Meet the officer team</h2>
+    <p class="section-sub">Advised by <b>Ms. Calderon</b>.</p>
+    <div class="officers">
+      <div class="officer lead"><div class="avatar">AB</div><div><h4>Aarohi Banerjee</h4><p>President</p></div></div>
+      <div class="officer lead"><div class="avatar">AS</div><div><h4>Aarav Shah</h4><p>Vice President</p></div></div>
+      <div class="officer"><div class="avatar">DA</div><div><h4>Dev Amin</h4><p>Events Manager</p></div></div>
+      <div class="officer"><div class="avatar">NP</div><div><h4>Nisharg Patel</h4><p>Events Manager</p></div></div>
+      <div class="officer"><div class="avatar">DS</div><div><h4>Diya Sanghvi</h4><p>Social Media Manager</p></div></div>
+      <div class="officer"><div class="avatar">MS</div><div><h4>Mahi Sharma</h4><p>Fundraising Manager</p></div></div>
+      <div class="officer"><div class="avatar">RC</div><div><h4>Rithvik Chintla</h4><p>Fundraising Manager</p></div></div>
+      <div class="officer"><div class="avatar">MP</div><div><h4>Mann Patel</h4><p>Community Service Manager</p></div></div>
+      <div class="officer"><div class="avatar">SP</div><div><h4>Shloke Parikh</h4><p>Passport of Progress</p></div></div>
+      <div class="officer"><div class="avatar">SH</div><div><h4>Sophia Huang</h4><p>Passport of Progress</p></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img class="foot-logo" src="images/logo.png" alt="CJCP FBLA logo">
+        <h4>Central Jersey College Prep FBLA</h4>
+        <p>Future Business Leaders of America, New Jersey chapter. Meetings every Thursday, 3:00–4:00 PM, Room 204.</p>
+        <a class="ig" href="https://www.instagram.com/cjcp_fbla/" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          @cjcp_fbla
+        </a>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#officers">Officers</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get involved</h4>
+        <ul>
+          <li><a href="#register">Register for an event</a></li>
+          <li><a href="#register">Become a member</a></li>
+          <li><a href="https://www.fbla.org" target="_blank" rel="noopener">FBLA National</a></li>
+          <li><a href="https://www.njfbla.org" target="_blank" rel="noopener">New Jersey FBLA</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© 2026 Central Jersey College Prep FBLA · Somerset, New Jersey</div>
+  </div>
+</footer>
+
+<script>
+  // Sign-ups are saved to the "Registrations" tab of the chapter's Google Sheet (see Code.gs)
+  const FORM_URL = 'https://script.google.com/macros/s/AKfycbyvLiMRe-sV7kP0GbAEkJAk9NevvzRH_R6LIKvFhGX-D7VfpIjExyaZ2vvCUccLycoB/exec';
+  const form = document.getElementById('regForm');
+  const select = document.getElementById('event');
+  const teamField = document.getElementById('teamField');
+  const submitBtn = document.getElementById('submitBtn');
+  const errorEl = document.getElementById('formError');
+  const successEl = document.getElementById('formSuccess');
+
+  const syncTeam = () => teamField.classList.toggle('hidden', select.value !== 'volleyball');
+  select.addEventListener('change', syncTeam);
+
+  // Event card buttons preselect their event in the form
+  document.querySelectorAll('[data-event]').forEach(btn => {
+    btn.addEventListener('click', () => { select.value = btn.dataset.event; syncTeam(); });
+  });
+
+  const showError = msg => { errorEl.textContent = msg; errorEl.classList.remove('hidden'); };
+  const resetBtn = () => { submitBtn.disabled = false; submitBtn.textContent = 'Register'; };
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    errorEl.classList.add('hidden');
+    if (!form.checkValidity()) {
+      const bad = form.querySelector(':invalid');
+      bad.focus();
+      return showError(bad.type === 'email' ? 'Please enter a valid email.' : 'Please fill in every field.');
+    }
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Registering…';
+    try {
+      const res = await fetch(FORM_URL, { method: 'POST', body: new URLSearchParams(new FormData(form)) });
+      const result = await res.json();
+      if (!result.ok) throw new Error(result.error);
+      form.classList.add('hidden');
+      successEl.classList.remove('hidden');
+    } catch (err) {
+      showError(err.message && !err.message.includes('fetch') ? err.message : 'Something went wrong. Please try again.');
+    } finally {
+      resetBtn();
+    }
+  });
+
+  document.getElementById('registerAgain').addEventListener('click', () => {
+    form.reset(); syncTeam();
+    successEl.classList.add('hidden'); form.classList.remove('hidden');
+  });
+
+  // Close mobile menu after picking a link
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('open'));
+  });
+</script>
+</body>
+</html>
