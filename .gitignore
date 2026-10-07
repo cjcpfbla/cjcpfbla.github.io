@@ -1,4 +1,4 @@
 .DS_Store
 screenshot-*.png
 apps-script/
-.claude/settings.local.json
+.claude/
